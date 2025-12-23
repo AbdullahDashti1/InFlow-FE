@@ -10,8 +10,12 @@ import SignInForm from "./components/SignInForm/SignInForm";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Clients from "./components/Clients/Clients";
 import Quotes from "./components/Quotes/Quotes";
+import { useContext } from 'react';
+import { UserContext } from './contexts/UserContext';
 
 const App = () => {
+  const { user } = useContext(UserContext);
+  
   return (
     <>
       <NavBar />
