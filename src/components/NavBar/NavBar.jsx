@@ -35,7 +35,6 @@ const NavBar = () => {
           <NavLink to="/">Dashboard</NavLink>
           <NavLink to="/clients">Clients</NavLink>
           <NavLink to="/quotes">Quotes</NavLink>
-          <NavLink to="/account">Account</NavLink>
           <button onClick={handleSignOut}>Sign Out</button>
         </>
       ) : (
