@@ -27,7 +27,7 @@ const SignUpForm = () => {
     try {
       const newUser = await signUp(formData);
       setUser(newUser);
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {
       setMessage(err.message);
     }
@@ -40,13 +40,12 @@ const SignUpForm = () => {
   return (
     <div>
       <h1>Create Account</h1>
-      <p>Join Financial Ledger and take control of your finances</p>
 
       {message && <p>{message}</p>}
 
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor='username'>Username *</label>
+          <label htmlFor='username'>Username</label>
           <input
             type='text'
             id='username'
@@ -59,7 +58,7 @@ const SignUpForm = () => {
         </div>
 
         <div>
-          <label htmlFor='email'>Email *</label>
+          <label htmlFor='email'>Email</label>
           <input
             type='email'
             id='email'
@@ -84,7 +83,7 @@ const SignUpForm = () => {
         </div>
 
         <div>
-          <label htmlFor='password'>Password *</label>
+          <label htmlFor='password'>Password</label>
           <input
             type='password'
             id='password'
@@ -97,7 +96,7 @@ const SignUpForm = () => {
         </div>
 
         <div>
-          <label htmlFor='passwordConf'>Confirm Password *</label>
+          <label htmlFor='passwordConf'>Confirm Password</label>
           <input
             type='password'
             id='passwordConf'
