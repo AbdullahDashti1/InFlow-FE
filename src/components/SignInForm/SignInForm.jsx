@@ -25,7 +25,7 @@ const SignInForm = () => {
         password: formData.password,
       });
       setUser(signedInUser);
-      navigate('/dashboard');
+      navigate('/');
     } catch (err) {
       setMessage(err.message);
     }
