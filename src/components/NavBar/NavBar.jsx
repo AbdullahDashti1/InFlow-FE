@@ -1,7 +1,17 @@
-import { Link, useLocation } from 'react-router-dom';
+// src/components/NavBar/NavBar.jsx
+import { useContext } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { UserContext } from '../../contexts/UserContext';
 
 const NavBar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
+
+  const handleSignOut = () => {
+    localStorage.removeItem('token'); 
+    setUser(null);                     
+  };
 
   const isActive = (path) => location.pathname === path;
 
@@ -17,14 +27,24 @@ const NavBar = () => {
     </Link>
   );
 
+
   return (
     <nav>
-      {/* Navigation Links */}
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/sign-up">Sign Up</NavLink>
-      <NavLink to="/sign-in">Sign In</NavLink>
-      <NavLink to="/clients">Clients</NavLink>
-      <NavLink to="/quotes">Quotes</NavLink>
+      {user ? (
+        <>
+          <NavLink to="/">Dashboard</NavLink>
+          <NavLink to="/clients">Clients</NavLink>
+          <NavLink to="/quotes">Quotes</NavLink>
+          <NavLink to="/account">Account</NavLink>
+          <button onClick={handleSignOut}>Sign Out</button>
+        </>
+      ) : (
+        <>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/sign-up">Sign Up</NavLink>
+          <NavLink to="/sign-in">Sign In</NavLink>
+        </>
+      )}
     </nav>
   );
 };
