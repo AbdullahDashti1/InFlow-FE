@@ -109,3 +109,84 @@ const handleCancel = () => {
     }
   };
 
+ return (
+    <div>
+      <h1>Clients Management</h1>
+
+
+      <h3>{editId ? "Edit Client" : "Add New Client"}</h3>
+
+
+      <input
+        type="text"
+        name="name"
+        placeholder="Name"
+        value={newClient.name}
+        onChange={handleInputChange}
+      />
+
+
+      <br />
+
+
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={newClient.email}
+        onChange={handleInputChange}
+      />
+
+
+      <br />
+
+
+      <input
+        type="text"
+        name="phone"
+        placeholder="Phone"
+        value={newClient.phone}
+        onChange={handleInputChange}
+      />
+
+
+      <br />
+
+
+      <button onClick={handleSubmit}>
+        {editId ? "Update Client" : "Add Client"}
+      </button>
+
+
+      {editId && <button onClick={handleCancel}>Cancel</button>}
+
+
+      <hr />
+
+
+      <h3>All Clients</h3>
+
+
+      {clients.length === 0 && <p>No clients yet</p>}
+
+
+      {clients.map((client) => (
+        <div key={client.id}>
+          <p><strong>Name:</strong> {client.name}</p>
+          <p><strong>Email:</strong> {client.email}</p>
+          <p><strong>Phone:</strong> {client.phone}</p>
+
+
+          <button onClick={() => handleEdit(client)}>Edit</button>
+          <button onClick={() => handleDelete(client.id)}>Delete</button>
+
+
+          <hr />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+
+export default Clients;
