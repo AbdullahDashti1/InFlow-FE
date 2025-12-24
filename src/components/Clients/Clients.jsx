@@ -77,3 +77,12 @@ const handleSubmit = async () => {
       alert(err.message);
     }
   };
+
+  const handleEdit = (client) => {
+    setNewClient({
+      name: client.name,
+      email: client.email,
+      phone: client.phone,
+    });
+    setEditId(client.id);
+  };
