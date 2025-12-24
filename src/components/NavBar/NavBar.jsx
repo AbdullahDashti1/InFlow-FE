@@ -10,7 +10,8 @@ const NavBar = () => {
 
   const handleSignOut = () => {
     localStorage.removeItem('token'); 
-    setUser(null);                     
+    setUser(null);   
+    navigate('/');                   
   };
 
   const isActive = (path) => location.pathname === path;
