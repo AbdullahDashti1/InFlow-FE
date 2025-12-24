@@ -1,10 +1,27 @@
-const Clients = () => {
-  return (
-    <div>
-      <h1>Clients</h1>
-      <p>This is where clients will be shown.</p>
-    </div>
-  );
-};
+import { useState, useEffect } from "react";
 
-export default Clients; 
+
+const Clients = () => {
+  const [clients, setClients] = useState([]);
+  const [newClient, setNewClient] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+  const [editId, setEditId] = useState(null);
+
+
+  useEffect(() => {
+    const fetchClients = async () => {
+      try {
+        const res = await fetch("http://localhost:8000/api/clients");
+        const data = await res.json();
+        setClients(data || []);
+      } catch (err) {
+        console.error(err);
+        setClients([]);
+      }
+    };
+    fetchClients();
+  }, []);
+}
