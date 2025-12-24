@@ -25,3 +25,8 @@ const Clients = () => {
     fetchClients();
   }, []);
 }
+
+const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewClient({ ...newClient, [name]: value });
+  };
