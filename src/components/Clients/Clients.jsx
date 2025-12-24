@@ -24,16 +24,15 @@ const Clients = () => {
     };
     fetchClients();
   }, []);
-}
 
-const handleInputChange = (e) => {
+
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewClient({ ...newClient, [name]: value });
   };
 
-  
 
-const handleSubmit = async () => {
+  const handleSubmit = async () => {
     if (!newClient.name || !newClient.email || !newClient.phone) {
       alert("Please fill all fields");
       return;
@@ -78,7 +77,8 @@ const handleSubmit = async () => {
     }
   };
 
-const handleEdit = (client) => {
+
+  const handleEdit = (client) => {
     setNewClient({
       name: client.name,
       email: client.email,
@@ -87,12 +87,14 @@ const handleEdit = (client) => {
     setEditId(client.id);
   };
 
-const handleCancel = () => {
+
+  const handleCancel = () => {
     setEditId(null);
     setNewClient({ name: "", email: "", phone: "" });
   };
 
-    const handleDelete = async (id) => {
+
+  const handleDelete = async (id) => {
     if (!window.confirm("Delete this client?")) return;
 
 
@@ -109,7 +111,8 @@ const handleCancel = () => {
     }
   };
 
- return (
+
+  return (
     <div>
       <h1>Clients Management</h1>
 
@@ -185,7 +188,8 @@ const handleCancel = () => {
         </div>
       ))}
     </div>
-);
+  );
+};
 
 
 export default Clients;
