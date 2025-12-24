@@ -185,8 +185,7 @@ const handleCancel = () => {
         </div>
       ))}
     </div>
-  );
-};
+);
 
 
 export default Clients;
