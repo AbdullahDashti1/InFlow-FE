@@ -78,7 +78,7 @@ const handleSubmit = async () => {
     }
   };
 
-  const handleEdit = (client) => {
+const handleEdit = (client) => {
     setNewClient({
       name: client.name,
       email: client.email,
@@ -86,3 +86,26 @@ const handleSubmit = async () => {
     });
     setEditId(client.id);
   };
+
+const handleCancel = () => {
+    setEditId(null);
+    setNewClient({ name: "", email: "", phone: "" });
+  };
+
+    const handleDelete = async (id) => {
+    if (!window.confirm("Delete this client?")) return;
+
+
+    try {
+      const res = await fetch(
+        `http://localhost:8000/api/clients/${id}`,
+        { method: "DELETE" }
+      );
+      if (!res.ok) throw new Error("Failed to delete client");
+      setClients(clients.filter((c) => c.id !== id));
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
+
