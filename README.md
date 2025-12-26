@@ -1,16 +1,85 @@
-# React + Vite
+# InFlow - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+The frontend application for InFlow, a comprehensive invoice and quote management system. Built with React and Tailwind CSS, it provides a modern, responsive interface for managing clients, generating quotes, and tracking invoices.
 
-Currently, two official plugins are available:
+## Features
+- **Authentication**: Secure JWT-based Login and Registration with multi-user support (Company data isolation).
+- **Dashboard**: Real-time overview of revenue, outstanding balances, and recent activity (Collapsible Sidebar).
+- **Client Management**: Add, edit, and list clients with search functionality.
+- **Quote Management**: Create dynamic quotes with line items, download as PDF, and delete quotes.
+- **Invoice Management**: Generate invoices from quotes, track status, delete invoices, and manage payments.
+- **Payment Tracking**: Record, update, and cancel payments with strict balance validation logic.
+- **Settings**: Manage user profile and update passwords securely.
+- **Responsive Design**: Premium UI built with Tailwind CSS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
+- **Framework**: React 19 (Vite)
+- **Styling**: Tailwind CSS
+- **Routing**: React Router DOM
+- **State Management**: React Context API
+- **Forms**: React Hook Form
+- **Validation**: Zod (via react-hook-form)
+- **Icons**: Lucide React
+- **HTTP Client**: Axios
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites
+- Node.js (v16+)
+- NPM or Yarn
 
-## Expanding the ESLint configuration
+### Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. **Clone the repository:**
+   ```bash
+   git clone <repository_url>
+   cd InFlow-FE
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Environment Setup:**
+   Create a `.env` file in the root directory (optional if using default local backend):
+   ```env
+   VITE_BACK_END_SERVER_URL=http://localhost:8000/api
+   ```
+
+4. **Run Development Server:**
+   ```bash
+   npm run dev
+   ```
+   The app will be available at `http://localhost:5173`.
+
+## Project Structure
+```
+src/
+├── components/       # Reusable UI components
+│   ├── Layout/       # Sidebar and Layout wrappers
+│   └── NavBar/       # Navigation components
+├── contexts/         # React Contexts (User/Auth)
+├── pages/            # Page components
+│   ├── Clients/      # Client management pages
+│   ├── Invoices/     # Invoice management pages
+│   ├── Quotes/       # Quote management pages
+│   ├── Dashboard.jsx # Main dashboard
+│   ├── Login.jsx     # Authentication pages
+│   └── Register.jsx
+├── services/         # API service configurations
+├── App.jsx           # Main application routing
+└── main.jsx          # Entry point
+```
+
+## Backend Integration
+This frontend is designed to work with the InFlow Backend API. Ensure the backend is running locally on port 8000 (or update the `.env` file).
+
+## References
+- [React Documentation](https://react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Vite](https://vitejs.dev/)
+
+## Backend Repository
+https://github.com/yousifalansari/InFlow-BE
