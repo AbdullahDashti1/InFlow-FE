@@ -1,45 +1,48 @@
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}`;
+import api from './apiService';
+import { jwtDecode } from 'jwt-decode';
+
+// Auth endpoints are usually on the root or /auth depending on backend.
+// Following the legacy pattern which used /sign-up and /sign-in relative to base.
+// Explicitly defining the URL here as requested.
+const BASE_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
 
 const signUp = async (formData) => {
-  const res = await fetch(`${BASE_URL}/register`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  });
-
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(text || 'Signup failed');
+  try {
+    const res = await api.post(`${BASE_URL}/sign-up`, formData);
+    if (res.data.token) {
+      localStorage.setItem('token', res.data.token);
+      return jwtDecode(res.data.token);
+    }
+    return res.data;
+  } catch (error) {
+    console.error("Sign-up error:", error);
+    if (error.response?.data?.detail) {
+      const detail = error.response.data.detail;
+      if (Array.isArray(detail)) {
+        // Flatten Pydantic validation errors
+        throw detail.map(err => err.msg).join(', ');
+      }
+      throw detail;
+    }
+    throw error.message || "An unexpected error occurred";
   }
-
-  const data = await res.json();
-  if (data.token) {
-    localStorage.setItem('token', data.token);
-    return JSON.parse(atob(data.token.split('.')[1]));
-  }
-
-  return data;
 };
 
 const signIn = async (formData) => {
-  const res = await fetch(`${BASE_URL}/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  });
-
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(text || 'Login failed');
+  try {
+    const res = await api.post(`${BASE_URL}/sign-in`, formData);
+    if (res.data.token) {
+      localStorage.setItem('token', res.data.token);
+      return jwtDecode(res.data.token);
+    }
+    return res.data;
+  } catch (error) {
+    console.error("Sign-in error:", error);
+    if (error.response?.data?.detail) {
+      throw error.response.data.detail;
+    }
+    throw error.message || "An unexpected error occurred";
   }
-
-  const data = await res.json();
-  if (data.token) {
-    localStorage.setItem('token', data.token);
-    return JSON.parse(atob(data.token.split('.')[1]));
-  }
-
-  return data;
 };
 
-export {signUp, signIn};
+export { signUp, signIn };
