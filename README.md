@@ -1,5 +1,7 @@
 # InFlow - Frontend
 
+![InFlow Logo](/public/favicon.jpeg)
+
 ## Overview
 The frontend application for InFlow, a comprehensive invoice and quote management system. Built with React and Tailwind CSS, it provides a modern, responsive interface for managing clients, generating quotes, and tracking invoices.
 
