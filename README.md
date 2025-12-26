@@ -2,6 +2,15 @@
 
 ![InFlow Logo](/public/favicon.jpeg)
 
+## Deployment
+NOTE open both links so that both frontend and backend folders work
+
+# Deployed Front End:
+https://inflow-fe.onrender.com/
+
+# Deployed Back End:
+https://inflow-be.onrender.com/
+
 ## Overview
 The frontend application for InFlow, a comprehensive invoice and quote management system. Built with React and Tailwind CSS, it provides a modern, responsive interface for managing clients, generating quotes, and tracking invoices.
 
