@@ -1,24 +1,33 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 const UserContext = createContext();
 
 function UserProvider({ children }) {
-  const getUserFromToken = () => {
-  const token = localStorage.getItem('token');
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!token) return null;
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setUser(decoded);
+      } catch (error) {
+        localStorage.removeItem('token');
+        setUser(null);
+      }
+    }
+    setLoading(false);
+  }, []);
 
-  return JSON.parse(atob(token.split('.')[1]));
-};
-
-  const [user, setUser] = useState(getUserFromToken());
-  const value = { user, setUser };
+  const value = { user, setUser, loading };
 
   return (
     <UserContext.Provider value={value}>
-      {children}
+      {!loading && children}
     </UserContext.Provider>
   );
-};
+}
 
 export { UserProvider, UserContext };
